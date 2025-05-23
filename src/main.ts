@@ -20,9 +20,7 @@ async function bootstrap() {
   );
 
   await app.listen();
-  Logger.log(
-    `Products microservice running on port: ${envs.port}`,
-    'NestMicroservice',
-  );
+
+  Logger.log(`🚀 Listening on TCP port: ${envs.port}`, 'ProductsMicroservice');
 }
 bootstrap();
