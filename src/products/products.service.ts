@@ -23,14 +23,15 @@ export class ProductsService {
     const totalProducts = await this.prisma.product.count({
       where: { available: true },
     });
+
     const totalPages = Math.ceil(totalProducts / perPage);
 
     return {
       meta: {
-        total: totalProducts,
+        totalRecords: totalProducts,
         totalPages,
         page,
-        limit: perPage,
+        perPage,
       },
       data: await this.prisma.product.findMany({
         skip: (page - 1) * perPage,
@@ -46,10 +47,10 @@ export class ProductsService {
     });
 
     if (!product) {
-      throw new NotFoundException(`Product #${id} not found`);
+      throw new NotFoundException(`Product with id #${id} not found`);
       // throw new RpcException({
       //   statusCode: HttpStatus.BAD_REQUEST,
-      //   message: `Product #${id} not found`,
+      //   message: `Product with id #${id} not found`,
       // });
     }
 
