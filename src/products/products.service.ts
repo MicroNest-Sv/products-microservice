@@ -57,9 +57,8 @@ export class ProductsService {
     return product;
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { id: __, ...data } = updateProductDto;
+  async update(updateProductDto: UpdateProductDto) {
+    const { id, ...data } = updateProductDto;
 
     await this.findOne(id);
 
