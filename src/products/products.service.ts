@@ -1,4 +1,5 @@
-import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
 
 import { PrismaService } from '@src/common/services';
 import { PaginationDto } from '@src/common/dto';
@@ -47,11 +48,11 @@ export class ProductsService {
     });
 
     if (!product) {
-      throw new NotFoundException(`Product with id #${id} not found`);
-      // throw new RpcException({
-      //   statusCode: HttpStatus.BAD_REQUEST,
-      //   message: `Product with id #${id} not found`,
-      // });
+      // throw new NotFoundException(`Product with id #${id} not found`);
+      throw new RpcException({
+        status: HttpStatus.NOT_FOUND,
+        message: `Product with id #${id} not found`,
+      });
     }
 
     return product;
