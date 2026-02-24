@@ -1,6 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger, ValidationPipe } from '@nestjs/common';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { HttpStatus, Logger, ValidationPipe } from '@nestjs/common';
+import {
+  MicroserviceOptions,
+  RpcException,
+  Transport,
+} from '@nestjs/microservices';
 
 import { AppModule } from './app.module';
 import { appConfig } from './config';
@@ -21,7 +25,19 @@ async function bootstrap() {
   );
 
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      exceptionFactory: (errors) => {
+        const messages = errors.map((error) =>
+          Object.values(error.constraints ?? {}).join(', '),
+        );
+        return new RpcException({
+          status: HttpStatus.BAD_REQUEST,
+          message: messages,
+        });
+      },
+    }),
   );
 
   await app.listen();
