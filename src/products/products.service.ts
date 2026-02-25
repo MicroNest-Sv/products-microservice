@@ -51,7 +51,7 @@ export class ProductsService {
       // throw new NotFoundException(`Product with id #${id} not found`);
       throw new RpcException({
         status: HttpStatus.NOT_FOUND,
-        message: `Product with id #${id} not found`,
+        messages: [`Product with id #${id} not found`],
       });
     }
 

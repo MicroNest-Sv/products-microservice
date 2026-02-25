@@ -34,7 +34,7 @@ async function bootstrap() {
         );
         return new RpcException({
           status: HttpStatus.BAD_REQUEST,
-          message: messages,
+          messages: messages,
         });
       },
     }),
