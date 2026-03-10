@@ -16,4 +16,4 @@ pnpm exec prisma migrate dev
 pnpm run start:dev
 ```
 
-La app corre en el puerto `3000` por defecto (configurable en `.env`).
+La app corre en el puerto `3001` por defecto (configurable en `.env`).
