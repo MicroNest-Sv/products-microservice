@@ -4,7 +4,6 @@ import z from 'zod';
 import { EnvValidationError } from '@src/common/exceptions';
 
 const appEnvSchema = z.object({
-  PORT: z.coerce.number().default(3001),
   DATABASE_URL: z.url(),
   NATS_SERVERS: z
     .string()
@@ -14,7 +13,6 @@ const appEnvSchema = z.object({
 type AppEnv = z.infer<typeof appEnvSchema>;
 
 export interface AppConfig {
-  port: number;
   databaseUrl: string;
   natsServers: string[];
 }
@@ -27,7 +25,6 @@ export default registerAs('app', (): AppConfig => {
   const env: AppEnv = parsed.data;
 
   return {
-    port: env.PORT,
     databaseUrl: env.DATABASE_URL,
     natsServers: env.NATS_SERVERS,
   };

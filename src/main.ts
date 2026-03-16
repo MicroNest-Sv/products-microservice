@@ -42,7 +42,9 @@ async function bootstrap() {
 
   await app.listen();
 
-  logger.log(`Products Microservice running on port ${appConfigValues.port}`);
+  logger.log(
+    `Products Microservice running on NATS servers: ${appConfigValues.natsServers.join(', ')}`,
+  );
 }
 
 void bootstrap();
