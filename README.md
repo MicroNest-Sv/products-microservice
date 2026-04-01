@@ -2,7 +2,7 @@
 
 Microservicio de productos construido con [NestJS](https://nestjs.com/), Prisma y SQLite. Se comunica vía [NATS](https://nats.io/).
 
-## Inicio rápido
+## Inicio rápido (local)
 
 ```bash
 # 1. Levantar NATS
@@ -19,7 +19,18 @@ pnpm exec prisma migrate dev
 pnpm run start:dev
 ```
 
+## Docker
+
+```bash
+# Desde la raíz del proyecto (donde está compose.yaml)
+docker compose up --build
+```
+
+El contenedor ejecuta `prisma migrate deploy` automáticamente antes de iniciar la app.
+
 ## Variables de entorno
+
+Copiar `.env.example` a `.env` y configurar:
 
 ```env
 NATS_SERVERS="nats://localhost:4222"
