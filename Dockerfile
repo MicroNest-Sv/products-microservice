@@ -11,6 +11,6 @@ COPY . .
 
 RUN pnpm prisma generate
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["pnpm", "start:dev"]
